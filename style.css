@@ -11,7 +11,8 @@ html, body {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100vh;        /* fallback */
+  min-height: 100dvh;       /* excludes mobile browser UI */
   background:
     radial-gradient(circle at 50% 0%, #2a2342 0%, #15131f 60%, #0c0b12 100%);
   color: #e9e6f5;
@@ -120,7 +121,8 @@ body {
   --translate-y: 0px;
 
   /* size: always fit inside the viewport, room for controls */
-  width: min(86vw, calc(82vh * var(--card-aspect)));
+  width: min(86vw, calc(82vh * var(--card-aspect)));        /* fallback */
+  width: min(86vw, calc(82dvh * var(--card-aspect)));       /* excludes mobile browser UI */
   margin-top: 32px;
 
   transform: translate3d(0px, 0px, 0.01px);
