@@ -149,8 +149,8 @@ function orientate(e) {
 
   target.bx = adjust(degrees.x, -LIMIT.x, LIMIT.x, 37, 63);
   target.by = adjust(degrees.y, -LIMIT.y, LIMIT.y, 33, 67);
-  target.rx = round(degrees.x * -1);
-  target.ry = round(degrees.y);
+  target.rx = round(degrees.x);
+  target.ry = round(degrees.y * -1);
   target.gx = adjust(degrees.x, -LIMIT.x, LIMIT.x, 0, 100);
   target.gy = adjust(degrees.y, -LIMIT.y, LIMIT.y, 0, 100);
   target.o = 1;
