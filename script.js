@@ -40,8 +40,8 @@ function applyEffect(i) {
   card.setAttribute("data-subtypes", "basic");
 }
 
-// start on "V (regular)" — a nice default for Ralts
-const START = 6;
+// start on "Holo Cosmos (galaxy)"
+const START = 3;
 select.value = String(START);
 applyEffect(START);
 
