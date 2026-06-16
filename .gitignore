@@ -1,0 +1,5 @@
+# local clone of the original project — not part of this site
+repo/
+# editor / OS cruft
+.DS_Store
+.claude/
