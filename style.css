@@ -124,6 +124,7 @@ body {
   width: min(86vw, calc(82vh * var(--card-aspect)));        /* fallback */
   width: min(86vw, calc(82dvh * var(--card-aspect)));       /* excludes mobile browser UI */
   margin-top: 32px;
+  margin-bottom: 32px;
 
   transform: translate3d(0px, 0px, 0.01px);
   pointer-events: none;
