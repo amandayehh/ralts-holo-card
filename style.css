@@ -30,8 +30,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* leave room for the controls bar at the bottom */
-  padding: 2vh 4vw 0;
+  padding: 16px 4vw;
   min-height: 0;
 }
 
@@ -124,8 +123,6 @@ body {
   /* size: always fit inside the viewport, room for controls */
   width: min(86vw, calc(82vh * var(--card-aspect)));        /* fallback */
   width: min(86vw, calc(82dvh * var(--card-aspect)));       /* excludes mobile browser UI */
-  margin-top: 16px;   /* + 16px controls padding = 32px gap to controls */
-  margin-bottom: 48px;
 
   transform: translate3d(0px, 0px, 0.01px);
   pointer-events: none;
