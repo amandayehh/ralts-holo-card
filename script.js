@@ -159,29 +159,49 @@ function orientate(e) {
   kick();
 }
 
+let gyroStarted = false;
 function startGyro() {
   baseline = null; // recalibrate to current hold position
   window.addEventListener("deviceorientation", orientate);
   gyroBtn.textContent = "Recalibrate gyroscope";
+  gyroStarted = true;
 }
 
-// only show the button when the device actually reports orientation
+// request permission (iOS) then start. returns true on success.
+async function enableGyro() {
+  if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    try {
+      const res = await DeviceOrientationEvent.requestPermission();
+      if (res !== "granted") { gyroBtn.textContent = "Motion permission denied"; return false; }
+    } catch (err) {
+      gyroBtn.textContent = "Motion unavailable"; return false;
+    }
+  }
+  startGyro();
+  return true;
+}
+
+const needsPermission =
+  typeof DeviceOrientationEvent !== "undefined" &&
+  typeof DeviceOrientationEvent.requestPermission === "function";
+
 if (window.DeviceOrientationEvent) {
   gyroBtn.hidden = false;
-  gyroBtn.addEventListener("click", async () => {
-    // iOS 13+ requires permission, requested from this user gesture
-    if (typeof DeviceOrientationEvent.requestPermission === "function") {
-      try {
-        const res = await DeviceOrientationEvent.requestPermission();
-        if (res !== "granted") {
-          gyroBtn.textContent = "Motion permission denied";
-          return;
-        }
-      } catch (err) {
-        gyroBtn.textContent = "Motion unavailable";
-        return;
-      }
-    }
+
+  // tapping the button always works (recalibrate after it's running)
+  gyroBtn.addEventListener("click", enableGyro);
+
+  if (needsPermission) {
+    // iOS: can't auto-prompt on load (Apple requires a user gesture),
+    // so fire the prompt on the very first tap anywhere on the page.
+    const firstTouch = async () => {
+      if (gyroStarted) return;
+      await enableGyro();
+    };
+    window.addEventListener("pointerdown", firstTouch, { once: true });
+    window.addEventListener("touchend", firstTouch, { once: true });
+  } else {
+    // Android / desktop: no permission needed, start immediately.
     startGyro();
-  });
+  }
 }
