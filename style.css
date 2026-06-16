@@ -37,7 +37,7 @@ body {
 
 .controls {
   flex: 0 0 auto;
-  margin-top: 16px;   /* + 16px padding = 32px above controls */
+  margin-top: 0;   /* 16px padding = 16px above controls */
   padding: 16px;
   display: flex;
   justify-content: center;
